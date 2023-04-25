@@ -30,12 +30,13 @@ public:
 class CarBuilder {
     std::shared_ptr<Car> _car;
 public:
-    auto step1() ->CarBuilder * {
+    auto step1() ->CarBuilder* {
         _car.reset(new Car);
         return this;
     }
     auto step2(uint32_t parts=5) ->CarBuilder* {
         _car->setParts(parts);
+        return this;
     }
     auto get() {
         return _car;
