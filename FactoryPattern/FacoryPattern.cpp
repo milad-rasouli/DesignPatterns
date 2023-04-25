@@ -27,6 +27,7 @@ public:
 class EmployeeFactory {
 public:
 	static auto create(std::string const& name,std::string const& type) {
+		/* here, we can use switch-case as well */
 		if(type=="developer")
 			return std::make_unique<Tester>(name, type);
 		if(type =="tester")
