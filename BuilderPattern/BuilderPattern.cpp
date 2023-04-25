@@ -5,14 +5,14 @@
 template<typename T>
 class Shop {
 public:
-    auto builder(T builder){
+    static auto builder(T builder){
         builder.step1();
         builder.step2();
         return builder.get();
     }
 };
 
-/* main class */
+/* Main class */
 class Car {
     uint32_t _parts;
 public:
@@ -26,30 +26,30 @@ public:
     }
 };
 
-/* builder class */
+/* Builder class */
 class CarBuilder {
     std::shared_ptr<Car> _car;
 public:
-    auto step1() {
+    auto step1() ->CarBuilder * {
         _car.reset(new Car);
         return this;
     }
-    auto step2(uint32_t parts=5) {
+    auto step2(uint32_t parts=5) ->CarBuilder* {
         _car->setParts(parts);
-        return this;
     }
     auto get() {
         return _car;
     }
 };
 
+
+
 int main()
 {
-    Shop<CarBuilder> shop;
     CarBuilder carBuilder;
 
     /* all ways to build an object */
-    auto car1 = shop.builder(carBuilder);
+    auto car1 = Shop<CarBuilder>::builder(carBuilder);
     
     carBuilder.step1();
     carBuilder.step2(77);
